@@ -40,8 +40,8 @@ static int write_in_remainder_and_line(char **rem_line, char **line)
 int get_line_from_file(int fd, char **line)
 {
 	static char	*rem_line;
-	int	bytes_read;
-	char	buffer[BUFFER_SIZE + 1];
+	int		bytes_read;
+	char		buffer[BUFFER_SIZE + 1];
 
 	if (!line || fd < 0 || read(fd, buffer, 0) == -1)
 		return (-1);
