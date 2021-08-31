@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_line_from_file.h"
 
-int		write_in_remainder_and_line(char **rem_line, char **line)
+static int write_in_remainder_and_line(char **rem_line, char **line)
 {
-	char		*temp;
-	int			i;
+	char	*temp;
+	int	i;
 
-	if ((i = ft_search_index_newline(*rem_line)) != -1)
+	if ((i = search_index_newline(*rem_line)) != -1)
 	{
-		*line = ft_substring(*rem_line, 0, i);
-		temp = ft_substring(*rem_line, i + 1, ft_strlen(*rem_line + i + 1));
+		*line = my_substr(*rem_line, 0, i);
+		temp = my_substr(*rem_line, i + 1, my_strlen(*rem_line + i + 1));
 		free(*rem_line);
 		if (!(*line) || !temp)
 			return (-1);
@@ -29,7 +29,7 @@ int		write_in_remainder_and_line(char **rem_line, char **line)
 	}
 	else
 	{
-		if (!(*line = ft_substring(*rem_line, 0, ft_strlen(*rem_line))))
+		if (!(*line = my_substr(*rem_line, 0, my_strlen(*rem_line))))
 			return (-1);
 		free(*rem_line);
 		*rem_line = NULL;
@@ -37,24 +37,24 @@ int		write_in_remainder_and_line(char **rem_line, char **line)
 	}
 }
 
-int		get_next_line(int fd, char **line)
+int get_line_from_file(int fd, char **line)
 {
-	static char *rem_line;
-	int			bytes_read;
-	char		buffer[BUFFER_SIZE + 1];
+	static char	*rem_line;
+	int	bytes_read;
+	char	buffer[BUFFER_SIZE + 1];
 
 	if (!line || fd < 0 || read(fd, buffer, 0) == -1)
 		return (-1);
-	if (!(rem_line) && !(rem_line = ft_memory_for_new_string(1)))
+	if (!(rem_line) && !(rem_line = memory_for_new_string(1)))
 		return (-1);
-	if (ft_search_index_newline(rem_line) == -1)
+	if (search_index_newline(rem_line) == -1)
 	{
 		while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 		{
 			buffer[bytes_read] = '\0';
-			if (!(rem_line = ft_strjoin(rem_line, buffer)))
+			if (!(rem_line = join_two_string(rem_line, buffer)))
 				return (-1);
-			if (ft_search_index_newline(rem_line) != -1)
+			if (search_index_newline(rem_line) != -1)
 				break ;
 		}
 	}
