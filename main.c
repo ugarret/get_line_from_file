@@ -8,6 +8,7 @@ int		main()
 	char	*line;
 	int	i;
 
+	/*fd = open("one_long_string.txt", O_RDONLY);*/
 	fd = open("64bit_paragraph.txt", O_RDONLY);
 	while ((i = get_line_from_file(fd, &line)) > 0)
 	{

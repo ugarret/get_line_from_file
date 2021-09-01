@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ugarret <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/12 17:28:12 by ugarret           #+#    #+#             */
-/*   Updated: 2020/12/17 16:06:11 by ugarret          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_line_from_file.h"
 
 static int write_in_remainder_and_line(char **rem_line, char **line)
@@ -58,6 +46,5 @@ int get_line_from_file(int fd, char **line)
 				break ;
 		}
 	}
-
 	return (write_in_remainder_and_line(&rem_line, line));
 }
